@@ -31,16 +31,33 @@ def drw_lines():
     pygame.draw.line( sc, LINE_COLOR, (200, 0), (200, 600), LINE_WIDTH )
     pygame.draw.line( sc, LINE_COLOR, (400, 0), (400, 600), LINE_WIDTH )
 
-drw_lines()
-
 def mark_square(row, colr, playr):
     brd[row][colr] = playr
 
 def avbl_square(row, colr):
-    if brd[row][colr] == 0:
-        return True
-    else:
-        return False
+    return brd[row][colr] == 0
+
+def is_brd_full():
+    for row in range(BOARD_ROWS):
+        for colr in range(BOARD_COLORS):
+            if brd[row][colr] == 0:
+                 return False
+    return True
+
+print(is_brd_full())
+for row in range(BOARD_ROWS):
+        for colr in range(BOARD_COLORS):
+            mark_square( row, colr, 1 )
+print(is_brd_full())
+
+
+# Er midtfirkanten tilgjengelig?
+print (avbl_square ( 1, 1 ) )
+mark_square(1, 1, 2)
+print (avbl_square ( 1, 1 ) )
+
+
+drw_lines()
 
 mark_square(0, 0, 1)
 mark_square(1, 1, 2)
@@ -54,4 +71,9 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouseX = event.pos[0] # Dette er X
+            mouseY = event.pos[1] # Dette er Y
+
     pygame.display.update()
+
